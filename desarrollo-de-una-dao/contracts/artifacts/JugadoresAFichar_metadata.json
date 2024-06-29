@@ -1,0 +1,282 @@
+{
+	"compiler": {
+		"version": "0.8.25+commit.b61c2a91"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "ojeadorContract",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "jugador",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "nombre",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "precio",
+						"type": "uint256"
+					}
+				],
+				"name": "JugadorAnadido",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "jugador",
+						"type": "address"
+					}
+				],
+				"name": "JugadorEliminado",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_jugador",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "nombre",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "precio",
+						"type": "uint256"
+					}
+				],
+				"name": "anadirJugador",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_jugador",
+						"type": "address"
+					}
+				],
+				"name": "eliminarJugador",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "jugador",
+						"type": "address"
+					}
+				],
+				"name": "existeJug",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "jugadores",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "nombrecompleto",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_jugador",
+						"type": "address"
+					}
+				],
+				"name": "obtenerNombre",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_jugador",
+						"type": "address"
+					}
+				],
+				"name": "obtenerPrecio",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ojeadorContract_",
+				"outputs": [
+					{
+						"internalType": "contract Ojeador",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "value_jug",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"TP-DAO24/desarrollo-de-una-dao/contracts/JugadoresAFichar.sol": "JugadoresAFichar"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0xa535a5df777d44e945dd24aa43a11e44b024140fc340ad0dfe42acf4002aade1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41319e7f621f2dc3733511332c4fd032f8e32ad2aa7fd6f665c19741d9941a34",
+				"dweb:/ipfs/QmcYR3bd862GD1Bc7jwrU9bGxrhUu5na1oP964bDCu2id1"
+			]
+		},
+		"TP-DAO24/desarrollo-de-una-dao/contracts/JugadoresAFichar.sol": {
+			"keccak256": "0x0836f1b4722b7af2db532c94fb7d89e5e3f34f8be826d5a1217831e7f4c19812",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9cff1a08b7e6d9034f0ac3941d60e67f76759bbda439ac503a68e3c81df85d4c",
+				"dweb:/ipfs/QmZUodY1kny4i6HHPhkjhGPih3WaBxZmrmFnsmtvdFbrzn"
+			]
+		},
+		"TP-DAO24/desarrollo-de-una-dao/contracts/Member.sol": {
+			"keccak256": "0x9cbf18d9cf3257987e946d0ab03ca42554d2f531943d6c4a34a4af6c399ec4f3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://15cf3e0fdeaffee125d19c8d67cf1a90f1020d90afeac9d1d5f078d448f1cf6d",
+				"dweb:/ipfs/Qmd3i5TLNUJvjwqXm1sdCzckuKTPD65XpXJEfSKZGivn3W"
+			]
+		},
+		"TP-DAO24/desarrollo-de-una-dao/contracts/Ojeador.sol": {
+			"keccak256": "0x6cc66a3c517d446b5829e7262438d8a425c0d73e697a0e3b27f9d96b9671482e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2f4c091b2e8ddc1245ed4188e41a9be5323cfa829771ebad05337a1a19bc8896",
+				"dweb:/ipfs/QmTdeV8NqsVNexVfnmopYsyrqFGYdXNo8Lns8JtoUBzWCZ"
+			]
+		}
+	},
+	"version": 1
+}
