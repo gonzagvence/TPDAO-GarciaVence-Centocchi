@@ -5,6 +5,7 @@ Vamos a deployar Member.sol
 Luego, deployamos Ojeador.sol
 Después, deployamos JugadoresAFichar.sol utilizando la address del contrato deployado de Ojeador
 Finalmente, deployamos DAO.sol utilizando todas las address de los contratos deployados anteriormente.
+Como añadido, seteamos DAO en member con el setter.
 
 Interactuar:
 
