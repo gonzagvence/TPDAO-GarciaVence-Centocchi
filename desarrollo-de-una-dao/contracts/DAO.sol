@@ -20,10 +20,10 @@ contract DAO is ReentrancyGuard {
     }
 
     // Variables de estado
-    address public chairperson;
-    mapping(uint256 => Proposal) public proposals;
-    mapping(address => bool) public plantel;
-    uint256 public proposalCount;
+    address public chairperson; //Owner del contrato
+    mapping(uint256 => Proposal) public proposals; //Mapping de propuestas
+    mapping(address => bool) public plantel; //Mapping de jugadores en el plantel
+    uint256 public proposalCount; //Cantidad de propuestas
     Member public memberContract_;
     Ojeador public ojeadorContract_;
     JugadoresAFichar public jugadoresContract_;
@@ -46,11 +46,11 @@ contract DAO is ReentrancyGuard {
 
     // Constructor
     constructor(address memberContract, address ojeadorContract, address jugadoresContract) {
-        chairperson = msg.sender;
+        chairperson = msg.sender; //Generamos presidente del club
         memberContract_ = Member(memberContract);
         ojeadorContract_ = Ojeador(ojeadorContract);
         jugadoresContract_ = JugadoresAFichar(jugadoresContract);
-        proposalCount = 0;
+        proposalCount = 0; //Cantidad de propuestas seteadas en 0
     }
 
     // Función para crear una nueva propuesta
@@ -59,8 +59,8 @@ contract DAO is ReentrancyGuard {
         require(jugadoresContract_.existeJug(_jugador), "El jugador tiene que estar en la prelista.");
         require(!plantel[_jugador], "El jugador ya esta en el plantel.");
 
-        Proposal storage prop = proposals[proposalCount];
-        prop.jugador = _jugador;
+        Proposal storage prop = proposals[proposalCount]; //Generamos un struct de propuestas
+        prop.jugador = _jugador; //Guardamos todos los datos
         prop.deadline = block.timestamp + _duration;
         prop.executed = false;
         prop.votesFor = 0;
@@ -68,18 +68,18 @@ contract DAO is ReentrancyGuard {
 
         emit ProposalCreated(proposalCount, _jugador, prop.deadline);
 
-        proposalCount = proposalCount + 1;
+        proposalCount = proposalCount + 1; //Sumamos 1 en la cantidad de propuestas
     }
 
     // Función para votar una propuesta
     function vote(uint256 _proposalId, bool _support) external onlyMember {
-        Proposal storage prop = proposals[_proposalId];
+        Proposal storage prop = proposals[_proposalId]; //Identificamos la propuesta por id
         require(block.timestamp <= prop.deadline, "La votacion ha terminado.");
         require(!prop.voted[msg.sender], "Ya has votado en esta propuesta.");
 
-        prop.voted[msg.sender] = true;
+        prop.voted[msg.sender] = true; 
 
-        if (_support) {
+        if (_support) { //Asignamos voto positivo o negativo
             prop.votesFor++;
         } else {
             prop.votesAgainst++;
@@ -90,19 +90,19 @@ contract DAO is ReentrancyGuard {
 
     // Función para ejecutar una propuesta
     function executeProposal(uint256 _proposalId) external nonReentrant onlyChairperson {
-        Proposal storage prop = proposals[_proposalId];
+        Proposal storage prop = proposals[_proposalId]; //Identificamos propuesta
         require((prop.votesAgainst + prop.votesFor) >= (memberContract_.getCount() / 2), "La votacion no termino");
         require(!prop.executed, "La propuesta ya se ha ejecutado.");
         require(prop.votesFor > prop.votesAgainst, "La propuesta no fue aprobada.");
 
-        uint256 jugadorPrecio = jugadoresContract_.obtenerPrecio(prop.jugador);
+        uint256 jugadorPrecio = jugadoresContract_.obtenerPrecio(prop.jugador); //Obtenemos jugador
         require(address(this).balance >= jugadorPrecio, "Fondos insuficientes.");
 
-        (bool success, ) = payable(prop.jugador).call{value: jugadorPrecio}("");
+        (bool success, ) = payable(prop.jugador).call{value: jugadorPrecio}(""); //Pagamos transferencia
         require(success, "Transferencia de fondos fallida.");
 
-        prop.executed = true;
-        plantel[prop.jugador] = true;
+        prop.executed = true; //Actualizamos estados
+        plantel[prop.jugador] = true; //Agregamos a plantel
 
         emit ProposalExecuted(_proposalId);
     }

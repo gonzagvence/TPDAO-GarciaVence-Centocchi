@@ -20,11 +20,17 @@ contract Member {
         DAO = dao_;
     }
 
+    modifier onlyMember() {
+        require(members[msg.sender], "Solo miembros pueden realizar esta accion");
+        _;
+    }
+
     // Función para añadir un nuevo miembro
     //Se asegura que la transferencia de fondos se realiza después de actualizar el estado para evitar ataques de reentrada.
-    function addMember(address _member) external payable {
+    function addMember(address _member) external payable onlyMember{
         require(!members[_member], "La direccion ingresada ya esta actualmente registrada.");
-        require(msg.value > 1, "-");
+        require(msg.value > 1, "Se necesita una inversion inicial mayor a 1");
+    
         
         members[_member] = true; 
         emit MemberAdded(_member);
@@ -35,7 +41,7 @@ contract Member {
     }
 
     // Función para eliminar un miembro
-    function removeMember(address _member) external {
+    function removeMember(address _member) external onlyMember{
         require(members[_member], "No existe este miembro");
         members[_member] = false;
         emit MemberRemoved(_member);
